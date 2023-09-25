@@ -78,17 +78,12 @@ deletar_tudo() {
 
   sudo su - root <<EOF
   docker container rm redis-${empresa_delete} --force
+  docker container rm mysql-${empresa_delete} --force
   cd && rm -rf /etc/nginx/sites-enabled/${empresa_delete}-frontend
   cd && rm -rf /etc/nginx/sites-enabled/${empresa_delete}-backend  
   cd && rm -rf /etc/nginx/sites-available/${empresa_delete}-frontend
   cd && rm -rf /etc/nginx/sites-available/${empresa_delete}-backend
   
-  sleep 2
-
-  sudo su - postgres
-  dropuser ${empresa_delete}
-  dropdb ${empresa_delete}
-  exit
 EOF
 
 sleep 2
@@ -286,11 +281,7 @@ system_node_install() {
   sleep 2
   npm install -g npm@latest
   sleep 2
-  sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-  wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  sudo apt-get update -y && sudo apt-get -y install postgresql
-  sleep 2
-  sudo timedatectl set-timezone America/Sao_Paulo
+  sudo timedatectl set-timezone America/Manaus
   
 EOF
 
