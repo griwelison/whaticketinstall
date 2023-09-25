@@ -80,6 +80,14 @@ get_redis_port() {
   printf "\n\n"
   read -p "> " redis_port
 }
+get_mysql_port() {
+  
+  print_banner
+  printf "${WHITE} 💻 Digite a porta MYSQL para ${instancia_add}; Ex: 3306 (3306, 3307...) ${GRAY_LIGHT}"
+  printf "\n\n"
+  read -p "> " mysql_port
+}
+
 
 get_empresa_delete() {
   
@@ -166,6 +174,7 @@ get_urls() {
   get_frontend_port
   get_backend_port
   get_redis_port
+  get_mysql_port
 }
 
 software_update() {
